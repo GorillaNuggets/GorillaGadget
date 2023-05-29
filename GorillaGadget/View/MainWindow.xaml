@@ -1,0 +1,252 @@
+﻿<Window x:Class="GorillaGadget.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GorillaGadget"
+        mc:Ignorable="d"
+        Title="Gorilla's WvW Gadget"
+        Name="MatchupWindow"
+        Background="Black"
+        FontFamily="Calibri"
+        FontSize="14"
+        FontStyle="Normal"
+        FontWeight="Bold"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    <Window.Resources>
+        <Style x:Key="AlignLabel" TargetType="{x:Type Label}">
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0,3,0,0"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical">
+        <!-- Button Panel -->
+        <Border Background="#161616" Margin="8,8,8,0" Width="360">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="202"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" 
+                            Grid.Column="0" 
+                            HorizontalAlignment="Center">
+                    <Label Content="Region:" 
+                           Foreground="DarkGray" 
+                           VerticalContentAlignment="Center">
+                    </Label>
+                    <RadioButton Content="NA" 
+                                 Name="naButton" 
+                                 Checked="NaButton_Checked" 
+                                 Width="45" 
+                                 Foreground="DarkGray" 
+                                 VerticalContentAlignment="Center">
+                    </RadioButton>
+                    <RadioButton Content="EU" 
+                                 Name="euButton" 
+                                 Checked="EuButton_Checked" 
+                                 Width="45" Foreground="DarkGray" 
+                                 VerticalContentAlignment="Center">
+                    </RadioButton>
+                </StackPanel>
+                <Button Grid.Column="2" 
+                        Content="Next Match" 
+                        Name="matchButton" 
+                        Click="MatchButton_Click" 
+                        Background="DarkGray" 
+                        Height="22" Width="106" 
+                        HorizontalAlignment="Center">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" 
+                                    Value="8">
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Border>
+        <!-- Current Matchup Panel -->
+        <StackPanel Orientation="Vertical" 
+                    Name="CurrentMatchPanel" 
+                    Visibility="Visible">
+            <Border Background="#161616" 
+                    Margin="8,0" 
+                    Width="360">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="202"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" 
+                           Foreground="DarkGray" 
+                           HorizontalContentAlignment="Center" 
+                           Content="{Binding RelinkDate,Mode=OneWay}">
+                    </Label>
+                    <Label Grid.Column="2" 
+                           Foreground="DarkGray" 
+                           HorizontalContentAlignment="Center" 
+                           Content="{Binding Skirmishes,Mode=OneWay}">
+                    </Label>
+                </Grid>
+            </Border>
+            <!-- Data Rows -->
+            <ItemsControl ItemsSource="{Binding Tiers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal" Margin="8,0">
+                                <Label Content="{Binding TierNumber,Mode=OneWay}" 
+                                       Foreground="DimGray" 
+                                       Height="26" 
+                                       Width="202" 
+                                       HorizontalContentAlignment="Center">
+                                </Label>
+                                <Label Content="Rank" 
+                                       Foreground="DimGray" 
+                                       Width="38" 
+                                       Height="26" 
+                                       HorizontalContentAlignment="Center">
+                                </Label>
+                                <Label Content="Victory Points" 
+                                       Foreground="DimGray" 
+                                       Width="120" 
+                                       Height="26" 
+                                       HorizontalContentAlignment="Center">
+                                </Label>
+                            </StackPanel>
+                            <ItemsControl ItemsSource="{Binding Servers}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Margin="8,2">
+                                            <Label Content="{Binding ServerName}"  
+                                                   Style="{StaticResource AlignLabel}" 
+                                                   Foreground="FloralWhite" 
+                                                   Background="{Binding ServerBgColor}" 
+                                                   Width="202">
+                                                <Label.ToolTip>
+                                                    <ToolTip Background="#161616" 
+                                                             Height="40" 
+                                                             Placement="Top" 
+                                                             HorizontalAlignment="Center">
+                                                        <TextBlock FontFamily="Cascadia Mono" 
+                                                                   FontSize="11" 
+                                                                   Foreground="Gainsboro" 
+                                                                   Text="{Binding ServerToolTip,Mode=OneWay}">
+                                                        </TextBlock>
+                                                    </ToolTip>
+                                                </Label.ToolTip>
+                                            </Label>
+                                            <Label Content="{Binding Rank}" 
+                                                   Style="{StaticResource AlignLabel}" 
+                                                   Foreground="{Binding RankFgColor}" 
+                                                   Background="{Binding RankBgColor}" 
+                                                   Width="22"  Margin="8,0">
+                                                <Label.ToolTip>
+                                                    <ToolTip Background="#161616" 
+                                                             HorizontalAlignment="Center" 
+                                                             Placement="Top">
+                                                        <Label FontFamily="Cascadia Mono" 
+                                                               FontSize="11" 
+                                                               Foreground="Gainsboro" 
+                                                               Content="{Binding RankToolTip,Mode=OneWay}">
+                                                        </Label>
+                                                    </ToolTip>
+                                                </Label.ToolTip>
+                                            </Label>
+                                            <Label Content="{Binding VictoryPoints}" 
+                                                   Style="{StaticResource AlignLabel}" 
+                                                   Foreground="{Binding VictoryPointsFgColor}" 
+                                                   Width="120">
+                                            </Label>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <!-- Bottom Label -->
+            <Border Background="#161616" Height="26" Margin="8">
+                <Label Content="{Binding EndOfMatch, Mode=OneWay}" 
+                       Foreground="DarkGray" 
+                       HorizontalContentAlignment="Center" 
+                       Padding="0,3,0,0">
+                </Label>
+            </Border>
+        </StackPanel>
+        <!-- Next Matchup Panel -->
+        <StackPanel Orientation="Vertical" Name="NextMatchPanel" Visibility="Collapsed">
+            <Border Background="#161616" Margin="8,0,8,8" Width="360">
+                <Label Content="{Binding RelinkWeek,Mode=OneWay}" 
+                       Foreground="DarkGray" 
+                       VerticalContentAlignment="Center" 
+                       HorizontalAlignment="Center">
+                </Label>
+            </Border>
+            <!-- Data Cell -->
+            <ItemsControl ItemsSource="{Binding Tiers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="202"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="70"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Column="0" Background="#161616">
+                                <Label Content="{Binding TierNumber,Mode=OneWay}"
+                                       Foreground="DarkGray"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center">
+                                </Label>
+                            </Border>
+                            <ItemsControl ItemsSource="{Binding NextMatchup}" Grid.Column="2">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding ServerName,Mode=OneWay}" 
+                                               Background="{Binding ServerBgColor,Mode=OneWay}"
+                                               Style="{StaticResource AlignLabel}"
+                                               Foreground="FloralWhite"
+                                               Width="202"
+                                               Margin="0,0,0,2">
+                                            <Label.ToolTip>
+                                                <ToolTip Background="#161616" 
+                                                         Height="40" 
+                                                         Placement="Top" 
+                                                         HorizontalAlignment="Center">
+                                                    <TextBlock Text="{Binding ServerToolTip,Mode=OneWay}" 
+                                                               FontFamily="Cascadia Mono" 
+                                                               FontSize="11" 
+                                                               Foreground="Gainsboro">
+                                                    </TextBlock>
+                                                </ToolTip>
+                                            </Label.ToolTip>
+                                        </Label>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <!-- Bottom Label -->
+            <Border Background="#161616" Height="26" Margin="8">
+                <Label Content="Note: Relink matchups can not be predicted" 
+                       Foreground="DarkGray" 
+                       HorizontalContentAlignment="Center" 
+                       Padding="0,3,0,0">
+                </Label>
+            </Border>
+        </StackPanel>
+    </StackPanel>
+</Window>
