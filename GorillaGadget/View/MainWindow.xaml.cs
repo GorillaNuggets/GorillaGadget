@@ -114,12 +114,14 @@ namespace GorillaGadget
                     Next_Matchup_Panel.Visibility = Visibility.Collapsed;
                     Population_Panel.Visibility = Visibility.Collapsed;                    
                     matchButton.Visibility = Visibility.Visible;
+                    matchButton.Content = "Next Matchup";
                     break;
                 case 1:
                     Current_Matchup_Panel.Visibility = Visibility.Collapsed;
                     Next_Matchup_Panel.Visibility = Visibility.Visible;
                     Population_Panel.Visibility = Visibility.Collapsed;                    
                     matchButton.Visibility = Visibility.Visible;
+                    matchButton.Content = "Back";
                     break;
                 case 2:
                     Current_Matchup_Panel.Visibility = Visibility.Collapsed;
@@ -135,12 +137,10 @@ namespace GorillaGadget
             if (Current_Matchup_Panel.Visibility == Visibility.Visible)
             {
                 PanelVisibilitySwitch(1);
-                matchButton.Content = "Back";
             }
             else
             {
                 PanelVisibilitySwitch(0);
-                matchButton.Content = "Next Matchup";
             }
         }
     }
