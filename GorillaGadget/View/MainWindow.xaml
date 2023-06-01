@@ -25,45 +25,45 @@
     </Window.Resources>
     <StackPanel Orientation="Vertical">
         <!-- Button Panel -->
-        <Border Background="#161616" Margin="8,8,8,0" Width="360">
+        <Border Background="#242424" Margin="8,0,8,2" Width="360">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="202"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="120"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" 
-                            Grid.Column="0" 
-                            HorizontalAlignment="Center">
-                    <Label Content="Region:" 
-                           Foreground="DarkGray" 
-                           VerticalContentAlignment="Center">
-                    </Label>
+                <StackPanel Grid.Column="0" 
+							Orientation="Horizontal" 
+							VerticalAlignment="Center" 
+							HorizontalAlignment="Center">
+                    <Label Content="Region:" Foreground="DarkGray"/>
                     <RadioButton Content="NA" 
-                                 Name="naButton" 
+								 Name="naButton" 
                                  Checked="NaButton_Checked" 
                                  Width="45" 
                                  Foreground="DarkGray" 
                                  VerticalContentAlignment="Center">
                     </RadioButton>
                     <RadioButton Content="EU" 
-                                 Name="euButton" 
+								 Name="euButton" 
                                  Checked="EuButton_Checked" 
                                  Width="45" Foreground="DarkGray" 
                                  VerticalContentAlignment="Center">
                     </RadioButton>
                 </StackPanel>
-                <Button Grid.Column="2" 
-                        Content="Next Match" 
-                        Name="matchButton" 
-                        Click="MatchButton_Click" 
-                        Background="DarkGray" 
-                        Height="22" Width="106" 
-                        HorizontalAlignment="Center">
+                <Button Content="Population" 
+						Name="populationButton" 
+                        Click="populationButton_Click" 
+                        Grid.Column="2" 
+                        Foreground="Black" 
+                        Background="gray" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center"
+                        Width="108">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" 
-                                    Value="8">
+                                    Value="4">
                             </Setter>
                         </Style>
                     </Button.Resources>
@@ -86,17 +86,17 @@
                     <Label Grid.Column="0" 
                            Foreground="DarkGray" 
                            HorizontalContentAlignment="Center" 
-                           Content="{Binding RelinkDate,Mode=OneWay}">
+                           Content="{Binding Matchup.RelinkDate,Mode=OneWay}">
                     </Label>
                     <Label Grid.Column="2" 
                            Foreground="DarkGray" 
                            HorizontalContentAlignment="Center" 
-                           Content="{Binding Skirmishes,Mode=OneWay}">
+                           Content="{Binding Matchup.Skirmishes,Mode=OneWay}">
                     </Label>
                 </Grid>
             </Border>
             <!-- Data Rows -->
-            <ItemsControl ItemsSource="{Binding Tiers}">
+            <ItemsControl ItemsSource="{Binding Matchup.Tiers}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
@@ -173,25 +173,56 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <!-- Bottom Label -->
-            <Border Background="#161616" Height="26" Margin="8">
-                <Label Content="{Binding EndOfMatch, Mode=OneWay}" 
+            <Border Background="#161616" Height="26" Margin="8,8,8,2">
+                <Label Content="{Binding Matchup.EndOfMatch, Mode=OneWay}" 
                        Foreground="DarkGray" 
                        HorizontalContentAlignment="Center" 
                        Padding="0,3,0,0">
                 </Label>
             </Border>
+            <!-- Next Match Button -->
+            <StackPanel>
+                <Button Content="Next Matchup"
+                        Name="matchButton1"
+                        Click="matchButton1_Click"
+				        Margin="7,0,7,7" 
+				        Height="27">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#242424"/>
+                            <Setter Property="Foreground" Value="LightGray"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" 
+										BorderBrush="Black" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#BEE6FD"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
         </StackPanel>
         <!-- Next Matchup Panel -->
         <StackPanel Orientation="Vertical" Name="NextMatchPanel" Visibility="Collapsed">
             <Border Background="#161616" Margin="8,0,8,8" Width="360">
-                <Label Content="{Binding RelinkWeek,Mode=OneWay}" 
+                <Label Content="{Binding Matchup.RelinkWeek,Mode=OneWay}" 
                        Foreground="DarkGray" 
                        VerticalContentAlignment="Center" 
                        HorizontalAlignment="Center">
                 </Label>
             </Border>
             <!-- Data Cell -->
-            <ItemsControl ItemsSource="{Binding Tiers}">
+            <ItemsControl ItemsSource="{Binding Matchup.Tiers}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="8">
@@ -240,13 +271,102 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <!-- Bottom Label -->
-            <Border Background="#161616" Height="26" Margin="8">
+            <Border Background="#161616" Height="26" Margin="8,8,8,2">
                 <Label Content="Note: Relink matchups can not be predicted" 
                        Foreground="DarkGray" 
                        HorizontalContentAlignment="Center" 
                        Padding="0,3,0,0">
                 </Label>
             </Border>
+            <!-- Next Match Button -->
+            <StackPanel>
+                <Button Content="Back"
+                        Name="matchButton2"
+                        Click="matchButton2_Click"
+				        Margin="7,0,7,7" 
+				        Height="27">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#242424"/>
+                            <Setter Property="Foreground" Value="LightGray"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" 
+										BorderBrush="Black" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#BEE6FD"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        <!-- Population Panel -->
+        <StackPanel Name="PopulationPanel" Visibility="Collapsed" Margin="8,0,8,8">
+            <Border Background="#161616">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Server" 
+                       Foreground="DarkGray" 
+                       Width="202" 
+                       HorizontalContentAlignment="Center">
+                    </Label>
+                    <Label Content="Population" 
+                       Foreground="DarkGray" 
+                       Width="93" 
+                       HorizontalContentAlignment="Center">
+                    </Label>
+                    <Label Content="Cost" 
+                       Foreground="DarkGray" 
+                       Width="65" 
+                       HorizontalContentAlignment="Center">
+                    </Label>
+                </StackPanel>
+            </Border>
+            <ItemsControl ItemsSource="{Binding Population,Mode=OneWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="202"/>
+                                <ColumnDefinition Width="93"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="22"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0"
+                                   Content="{Binding Name,Mode=OneWay}"
+                                   Background="{Binding BgColor,Mode=OneWay}" 
+                                   Foreground="Gainsboro" 
+                                   HorizontalContentAlignment="Center" 
+                                   Width="202"
+                                   Padding="0,3,0,0">
+                            </Label>
+                            <Label Grid.Column="1"
+                                   Content="{Binding Population,Mode=OneWay}"
+                                   Foreground="Gainsboro"
+                                   Padding="0,3,0,0"
+                                   HorizontalContentAlignment="Center">
+                            </Label>
+                            <Label Grid.Column="2"
+                                   Content="{Binding Gems,Mode=OneWay}"
+                                   Foreground="DodgerBlue"
+                                   Padding="0,3,0,0"
+                                   HorizontalAlignment="Right">                                
+                            </Label>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
     </StackPanel>
 </Window>

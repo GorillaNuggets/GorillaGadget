@@ -47,4 +47,8 @@ namespace GorillaGadget.Model
         [property: JsonPropertyName("blue")] int Blue,
         [property: JsonPropertyName("green")] int Green
     );
+
+    public record Exchange(
+        [property: JsonPropertyName("coins_per_gem")] decimal Coins
+    );
 }

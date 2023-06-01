@@ -12,14 +12,15 @@ namespace GorillaGadget
 {
     public partial class MainWindow : Window
     {
-        private readonly HttpClient httpClient = new();
-        private readonly MainWindowViewModel _viewModel = new();
+        private readonly HttpClient _httpClient = new();
+        private readonly MainWindowViewModel[] _viewModel = new MainWindowViewModel[2] { new(), new() };
 
         public MainWindow()
         {
             InitializeComponent();
             LoadData();
         }
+
         private async void LoadData()
         {
             const string worldsUrl = @"https://api.guildwars2.com/v2/worlds?ids=all";
@@ -28,41 +29,34 @@ namespace GorillaGadget
             const string matchesUrl = @"https://api.guildwars2.com/v2/wvw/matches?ids=all";
             var matches = (await FetchJsonList<Match>(matchesUrl)).OrderBy(x => x.Id).ToList();
 
-            _viewModel.Matchup = MatchFactory.GetMatchup(matches, worlds);
+            var _matchup = MatchFactory.GetMatchup(matches, worlds);
+            var _population = PopulationFactory.GetPopulation(worlds.Values.ToList());
+
+            for (int index = 0; index < 2; index++)
+            {
+                _viewModel[index].Matchup = _matchup[index];
+                _viewModel[index].Population = _population[index];
+            }
         }
+
         private async Task<List<T>> FetchJsonList<T>(string url)
         {
             return JsonSerializer.Deserialize<List<T>>(await CallApi(url)) ?? new List<T>();
         }
+
         private async Task<string> CallApi(string url)
         {
-            return await httpClient.GetAsync(url).Result.Content.ReadAsStringAsync();
+            return await _httpClient.GetAsync(url).Result.Content.ReadAsStringAsync();
         }
 
         private void NaButton_Checked(object sender, RoutedEventArgs e)
         {
-            DataContext = _viewModel.Matchup[0];
+            DataContext = _viewModel[0];
         }
 
         private void EuButton_Checked(object sender, RoutedEventArgs e)
         {
-            DataContext = _viewModel.Matchup[1];
-        }
-
-        private void MatchButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (CurrentMatchPanel.Visibility == Visibility.Visible)
-            {
-                CurrentMatchPanel.Visibility = Visibility.Collapsed;
-                NextMatchPanel.Visibility = Visibility.Visible;
-                matchButton.Content = "Back";
-            }
-            else
-            {
-                CurrentMatchPanel.Visibility = Visibility.Visible;
-                NextMatchPanel.Visibility = Visibility.Collapsed;
-                matchButton.Content = "Next Match";
-            }
+            DataContext = _viewModel[1];
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -95,6 +89,52 @@ namespace GorillaGadget
                 Properties.Settings.Default.EuSelected = false;
             }
             Properties.Settings.Default.Save();
+        }
+
+        private void populationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (PopulationPanel.Visibility == Visibility.Collapsed)
+            {
+                populationButton.Content = "Back";
+                PanelVisibilitySwitch(2);
+            }
+            else
+            {
+                populationButton.Content = "Population";
+                PanelVisibilitySwitch(0);
+            }
+        }
+
+        private void PanelVisibilitySwitch(int currentView)
+        {
+            switch (currentView)
+            {
+                case 0:
+                    CurrentMatchPanel.Visibility = Visibility.Visible;
+                    NextMatchPanel.Visibility = Visibility.Collapsed;
+                    PopulationPanel.Visibility = Visibility.Collapsed;
+                    break;
+                case 1:
+                    CurrentMatchPanel.Visibility = Visibility.Collapsed;
+                    NextMatchPanel.Visibility = Visibility.Visible;
+                    PopulationPanel.Visibility = Visibility.Collapsed;
+                    break;
+                case 2:
+                    CurrentMatchPanel.Visibility = Visibility.Collapsed;
+                    NextMatchPanel.Visibility = Visibility.Collapsed;
+                    PopulationPanel.Visibility = Visibility.Visible;
+                    break;
+            }
+        }
+
+        private void matchButton1_Click(object sender, RoutedEventArgs e)
+        {
+            PanelVisibilitySwitch(1);
+        }
+
+        private void matchButton2_Click(object sender, RoutedEventArgs e)
+        {
+            PanelVisibilitySwitch(0);
         }
     }
 }
