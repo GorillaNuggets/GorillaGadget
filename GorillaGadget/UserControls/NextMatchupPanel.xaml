@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="GorillaGadget.UserControls.NextMatchupPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GorillaGadget.UserControls"
+             mc:Ignorable="d">
+    <StackPanel Orientation="Vertical">
+        <Border Background="#161616" Margin="8,0,8,2" Width="360">
+            <Label Content="{Binding Matchup.RelinkWeek,Mode=OneWay}" 
+                   Foreground="DarkGray" 
+                   VerticalContentAlignment="Center" 
+                   HorizontalAlignment="Center">
+            </Label>
+        </Border>
+        <!-- Data Cell -->
+        <StackPanel Margin="8,4">
+            <ItemsControl ItemsSource="{Binding Matchup.Tiers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="202"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="89"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Column="0" Background="#161616">
+                                <Label Content="{Binding TierNumber,Mode=OneWay}"
+                                       Foreground="DarkGray"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center">
+                                </Label>
+                            </Border>
+                            <ItemsControl ItemsSource="{Binding NextMatchup}" Grid.Column="2">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding ServerName,Mode=OneWay}" 
+                                               Background="{Binding ServerBgColor,Mode=OneWay}"
+											   HorizontalContentAlignment="Center"
+											   Padding="0,5,0,0"
+                                               Foreground="FloralWhite"
+                                               Height="27" Width="202"
+                                               Margin="0,0,0,4">
+                                            <Label.ToolTip>
+                                                <ToolTip Background="#161616" 
+                                                         Height="40" 
+                                                         Placement="Top" 
+                                                         HorizontalAlignment="Center">
+                                                    <TextBlock Text="{Binding ServerToolTip,Mode=OneWay}" 
+                                                               FontFamily="Cascadia Mono" 
+                                                               FontSize="11" 
+                                                               Foreground="Gainsboro">
+                                                    </TextBlock>
+                                                </ToolTip>
+                                            </Label.ToolTip>
+                                        </Label>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        <!-- Bottom Label -->
+        <Border Background="#161616" Height="26" Margin="8,0,8,2">
+            <Label Content="Note: Relink matchups can not be predicted" 
+                   Foreground="DarkGray" 
+                   HorizontalContentAlignment="Center" 
+                   Padding="0,3,0,0">
+            </Label>
+        </Border>
+    </StackPanel>
+</UserControl>

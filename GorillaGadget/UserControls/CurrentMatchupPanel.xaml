@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="GorillaGadget.UserControls.CurrentMatchupPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GorillaGadget.UserControls"
+             mc:Ignorable="d">
+    <StackPanel Orientation="Vertical">
+        <Border Background="#161616" Margin="8,0" Width="360">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="202"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" 
+                           Foreground="DarkGray" 
+                           HorizontalContentAlignment="Center" 
+                           Content="{Binding Matchup.RelinkDate,Mode=OneWay}">
+                </Label>
+                <Label Grid.Column="2" 
+                           Foreground="DarkGray" 
+                           HorizontalContentAlignment="Center" 
+                           Content="{Binding Matchup.Skirmishes,Mode=OneWay}">
+                </Label>
+            </Grid>
+        </Border>
+        <!-- Data Rows -->
+        <ItemsControl ItemsSource="{Binding Matchup.Tiers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="8,0">
+                            <Label Content="{Binding TierNumber,Mode=OneWay}" 
+                                   Foreground="DimGray" 
+                                   Width="202" Height="28" 
+                                   HorizontalContentAlignment="Center"
+                                   VerticalAlignment="Center">
+                            </Label>
+                            <Label Content="Rank" 
+                                   Foreground="DimGray" 
+                                   Width="38" Height="28" 
+                                   HorizontalContentAlignment="Center"
+                                   VerticalAlignment="Center">
+                            </Label>
+                            <Label Content="Victory Points" 
+                                   Foreground="DimGray" 
+                                   Width="120" Height="28" 
+                                   HorizontalContentAlignment="Center"
+                                   VerticalAlignment="Center">
+                            </Label>
+                        </StackPanel>
+                        <ItemsControl ItemsSource="{Binding Servers}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="8,2">
+                                        <Label Content="{Binding ServerName}" 
+                                               Foreground="FloralWhite" 
+                                               Background="{Binding ServerBgColor}" 
+                                               Width="202" Height="22" 
+                                               Padding="0,3,0,0" 
+                                               HorizontalContentAlignment="Center">
+                                            <Label.ToolTip>
+                                                <ToolTip Background="#161616" 
+                                                         Height="40" 
+                                                         Placement="Top" 
+                                                         HorizontalAlignment="Center">
+                                                    <TextBlock Text="{Binding ServerToolTip,Mode=OneWay}" 
+                                                               FontFamily="Cascadia Mono" 
+                                                               FontSize="11" 
+                                                               Foreground="Gainsboro">
+                                                    </TextBlock>
+                                                </ToolTip>
+                                            </Label.ToolTip>
+                                        </Label>
+                                        <Label Content="{Binding Rank}" 
+                                               HorizontalContentAlignment="Center" 
+                                               Foreground="{Binding RankFgColor}" 
+                                               Background="{Binding RankBgColor}" 
+                                               Width="22"  Height="22" 
+                                               Padding="0,3,0,0" Margin="8,0">
+                                            <Label.ToolTip>
+                                                <ToolTip Background="#161616" 
+                                                         HorizontalAlignment="Center" 
+                                                         Placement="Top">
+                                                    <Label Content="{Binding RankToolTip,Mode=OneWay}" 
+                                                           FontFamily="Cascadia Mono" 
+                                                           FontSize="11" 
+                                                           Foreground="Gainsboro">
+                                                    </Label>
+                                                </ToolTip>
+                                            </Label.ToolTip>
+                                        </Label>
+                                        <Label Content="{Binding VictoryPoints}" 
+                                               HorizontalContentAlignment="Center" 
+                                               Foreground="{Binding VictoryPointsFgColor}" 
+                                               Width="120" Height="22" 
+                                               Padding="0,3,0,0">
+                                        </Label>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!-- Bottom Label -->
+        <Border Background="#161616" Height="26" Margin="8,6,8,2">
+            <Label Content="{Binding Matchup.EndOfMatch, Mode=OneWay}" 
+                   Foreground="DarkGray" 
+                   HorizontalContentAlignment="Center" 
+                   Padding="0,3,0,0">
+            </Label>
+        </Border>
+    </StackPanel>
+</UserControl>

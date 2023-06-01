@@ -93,7 +93,7 @@ namespace GorillaGadget
 
         private void populationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (PopulationPanel.Visibility == Visibility.Collapsed)
+            if (Population_Panel.Visibility == Visibility.Collapsed)
             {
                 populationButton.Content = "Back";
                 PanelVisibilitySwitch(2);
@@ -110,31 +110,38 @@ namespace GorillaGadget
             switch (currentView)
             {
                 case 0:
-                    CurrentMatchPanel.Visibility = Visibility.Visible;
-                    NextMatchPanel.Visibility = Visibility.Collapsed;
-                    PopulationPanel.Visibility = Visibility.Collapsed;
+                    Current_Matchup_Panel.Visibility = Visibility.Visible;
+                    Next_Matchup_Panel.Visibility = Visibility.Collapsed;
+                    Population_Panel.Visibility = Visibility.Collapsed;                    
+                    matchButton.Visibility = Visibility.Visible;
                     break;
                 case 1:
-                    CurrentMatchPanel.Visibility = Visibility.Collapsed;
-                    NextMatchPanel.Visibility = Visibility.Visible;
-                    PopulationPanel.Visibility = Visibility.Collapsed;
+                    Current_Matchup_Panel.Visibility = Visibility.Collapsed;
+                    Next_Matchup_Panel.Visibility = Visibility.Visible;
+                    Population_Panel.Visibility = Visibility.Collapsed;                    
+                    matchButton.Visibility = Visibility.Visible;
                     break;
                 case 2:
-                    CurrentMatchPanel.Visibility = Visibility.Collapsed;
-                    NextMatchPanel.Visibility = Visibility.Collapsed;
-                    PopulationPanel.Visibility = Visibility.Visible;
+                    Current_Matchup_Panel.Visibility = Visibility.Collapsed;
+                    Next_Matchup_Panel.Visibility = Visibility.Collapsed;
+                    Population_Panel.Visibility = Visibility.Visible;                    
+                    matchButton.Visibility = Visibility.Collapsed;
                     break;
             }
         }
 
-        private void matchButton1_Click(object sender, RoutedEventArgs e)
+        private void matchButton_Click(object sender, RoutedEventArgs e)
         {
-            PanelVisibilitySwitch(1);
-        }
-
-        private void matchButton2_Click(object sender, RoutedEventArgs e)
-        {
-            PanelVisibilitySwitch(0);
+            if (Current_Matchup_Panel.Visibility == Visibility.Visible)
+            {
+                PanelVisibilitySwitch(1);
+                matchButton.Content = "Back";
+            }
+            else
+            {
+                PanelVisibilitySwitch(0);
+                matchButton.Content = "Next Matchup";
+            }
         }
     }
 }
