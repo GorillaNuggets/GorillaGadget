@@ -23,6 +23,9 @@ namespace GorillaGadget.Service
                             {
                                 (matchup[region].Tiers[tier + 1].NextMatchup[0].ServerName, matchup[region].Tiers[tier].NextMatchup[2].ServerName) =
                                 (matchup[region].Tiers[tier].NextMatchup[2].ServerName, matchup[region].Tiers[tier + 1].NextMatchup[0].ServerName);
+
+                                (matchup[region].Tiers[tier + 1].NextMatchup[0].ServerToolTip, matchup[region].Tiers[tier].NextMatchup[2].ServerToolTip) =
+                                (matchup[region].Tiers[tier].NextMatchup[2].ServerToolTip, matchup[region].Tiers[tier + 1].NextMatchup[0].ServerToolTip);
                             }
                         }
                         break;
