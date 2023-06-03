@@ -6,22 +6,23 @@
              xmlns:local="clr-namespace:GorillaGadget.UserControls"
              mc:Ignorable="d">
     <StackPanel Orientation="Vertical">
-        <Border Background="#161616" Margin="8,0" Width="360">
+        <!-- Relinks Date and Skirmish Number Panel -->
+        <Border Background="#161616">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="202"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="38"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="120"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" 
-                           Foreground="DarkGray" 
-                           HorizontalContentAlignment="Center" 
-                           Content="{Binding Matchup.RelinkDate,Mode=OneWay}">
+                       Content="{Binding Matchup.RelinkDate,Mode=OneWay}"
+                       Foreground="DarkGray" 
+                       HorizontalContentAlignment="Center">
                 </Label>
                 <Label Grid.Column="2" 
-                           Foreground="DarkGray" 
-                           HorizontalContentAlignment="Center" 
-                           Content="{Binding Matchup.Skirmishes,Mode=OneWay}">
+                       Content="{Binding Matchup.Skirmishes,Mode=OneWay}"
+                       Foreground="DarkGray" 
+                       HorizontalContentAlignment="Center">                
                 </Label>
             </Grid>
         </Border>
@@ -30,36 +31,49 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal" Margin="8,0">
-                            <Label Content="{Binding TierNumber,Mode=OneWay}" 
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="38"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="22"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" 
+                                   Content="{Binding TierNumber,Mode=OneWay}" 
                                    Foreground="DimGray" 
-                                   Width="202" Height="28" 
-                                   HorizontalContentAlignment="Center"
-                                   VerticalAlignment="Center">
-                            </Label>
-                            <Label Content="Rank" 
+                                   HorizontalContentAlignment="Center" 
+                                   Padding="0,3"/>
+                            <Label Grid.Column="1" 
+                                   Content="Rank" 
                                    Foreground="DimGray" 
-                                   Width="38" Height="28" 
-                                   HorizontalContentAlignment="Center"
-                                   VerticalAlignment="Center">
-                            </Label>
-                            <Label Content="Victory Points" 
+                                   HorizontalContentAlignment="Center" 
+                                   Padding="0,3"/>
+                            <Label Grid.Column="2" 
+                                   Content="Victory Points" 
                                    Foreground="DimGray" 
-                                   Width="120" Height="28" 
-                                   HorizontalContentAlignment="Center"
-                                   VerticalAlignment="Center">
-                            </Label>
-                        </StackPanel>
+                                   HorizontalContentAlignment="Center" 
+                                   Padding="0,3"/>
+                        </Grid>
                         <ItemsControl ItemsSource="{Binding Servers}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="8,2">
-                                        <Label Content="{Binding ServerName}" 
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="38"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="22"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Column="0" 
+                                               Content="{Binding ServerName}" 
                                                Foreground="FloralWhite" 
                                                Background="{Binding ServerBgColor}" 
-                                               Width="202" Height="22" 
-                                               Padding="0,3,0,0" 
-                                               HorizontalContentAlignment="Center">
+                                               HorizontalContentAlignment="Center" 
+                                               Padding="0,3">
                                             <Label.ToolTip>
                                                 <ToolTip Background="#161616" 
                                                          Height="40" 
@@ -71,14 +85,14 @@
                                                                Foreground="Gainsboro">
                                                     </TextBlock>
                                                 </ToolTip>
-                                            </Label.ToolTip>
+                                            </Label.ToolTip>                                            
                                         </Label>
-                                        <Label Content="{Binding Rank}" 
-                                               HorizontalContentAlignment="Center" 
+                                        <Label Grid.Column="1" 
+                                               Content="{Binding Rank}" 
                                                Foreground="{Binding RankFgColor}" 
                                                Background="{Binding RankBgColor}" 
-                                               Width="22"  Height="22" 
-                                               Padding="0,3,0,0" Margin="8,0">
+                                               HorizontalContentAlignment="Center" 
+                                               Margin="6,0" Padding="0,3">
                                             <Label.ToolTip>
                                                 <ToolTip Background="#161616" 
                                                          HorizontalAlignment="Center" 
@@ -91,13 +105,14 @@
                                                 </ToolTip>
                                             </Label.ToolTip>
                                         </Label>
-                                        <Label Content="{Binding VictoryPoints}" 
+                                        <Label Grid.Column="2" 
+                                               Content="{Binding VictoryPoints}" 
+                                               Foreground="FloralWhite" 
+                                               Background="black" 
                                                HorizontalContentAlignment="Center" 
-                                               Foreground="{Binding VictoryPointsFgColor}" 
-                                               Width="120" Height="22" 
-                                               Padding="0,3,0,0">
+                                               Padding="0,3">
                                         </Label>
-                                    </StackPanel>
+                                    </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -105,13 +120,12 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <!-- Bottom Label -->
-        <Border Background="#161616" Height="26" Margin="8,6,8,2">
+        <!-- End of Match Label -->
+        <Border Background="#161616" Height="26" Margin="0,6,0,0">
             <Label Content="{Binding Matchup.EndOfMatch, Mode=OneWay}" 
                    Foreground="DarkGray" 
                    HorizontalContentAlignment="Center" 
-                   Padding="0,3,0,0">
-            </Label>
+                   Padding="0,5,0,0"/>
         </Border>
     </StackPanel>
 </UserControl>

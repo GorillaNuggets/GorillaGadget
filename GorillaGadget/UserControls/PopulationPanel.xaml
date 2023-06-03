@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GorillaGadget.UserControls"
              mc:Ignorable="d">
-    <StackPanel Margin="8,0,8,8">
-        <Border Background="#161616">
+    <StackPanel Orientation="Vertical">
+        <Border Background="#161616" Margin="0,0,0,2">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Server" 
                        Foreground="DarkGray" 
@@ -28,7 +28,7 @@
         <ItemsControl ItemsSource="{Binding Population,Mode=OneWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,2">
+                    <Grid Margin="0,4,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="202"/>
                             <ColumnDefinition Width="93"/>

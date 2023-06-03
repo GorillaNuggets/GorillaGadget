@@ -58,7 +58,7 @@ namespace GorillaGadget
         {
             DataContext = _viewModel[1];
         }
-
+                
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             MatchupWindow.Top = Properties.Settings.Default.WindowTop;
@@ -90,51 +90,56 @@ namespace GorillaGadget
             }
             Properties.Settings.Default.Save();
         }
-
-        private void populationButton_Click(object sender, RoutedEventArgs e)
+        
+        private void matchupButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (Population_Panel.Visibility == Visibility.Collapsed)
-            {
-                populationButton.Content = "Back";
-                PanelVisibilitySwitch(2);
-            }
-            else
-            {
-                populationButton.Content = "Population";
-                PanelVisibilitySwitch(0);
-            }
+            PanelVisibilitySwitch(0);
         }
 
-        private void PanelVisibilitySwitch(int currentView)
+        private void populationButton_Checked(object sender, RoutedEventArgs e)
         {
+            PanelVisibilitySwitch(2);
+        }
+        private void PanelVisibilitySwitch(int currentView)
+        {            
             switch (currentView)
-            {
+            {                
                 case 0:
-                    Current_Matchup_Panel.Visibility = Visibility.Visible;
-                    Next_Matchup_Panel.Visibility = Visibility.Collapsed;
-                    Population_Panel.Visibility = Visibility.Collapsed;                    
-                    matchButton.Visibility = Visibility.Visible;
-                    matchButton.Content = "Next Matchup";
+                    if (Current_Matchup_Panel != null)
+                    {
+                        Current_Matchup_Panel.Visibility = Visibility.Visible;
+                        Next_Matchup_Panel.Visibility = Visibility.Collapsed;
+                        Population_Panel.Visibility = Visibility.Collapsed;
+                        NextMatchupButton.Content = "Next Matchup";
+                        NextMatchupButton.IsEnabled = true;
+                    }
                     break;
                 case 1:
-                    Current_Matchup_Panel.Visibility = Visibility.Collapsed;
-                    Next_Matchup_Panel.Visibility = Visibility.Visible;
-                    Population_Panel.Visibility = Visibility.Collapsed;                    
-                    matchButton.Visibility = Visibility.Visible;
-                    matchButton.Content = "Back";
+                    if (Next_Matchup_Panel != null)
+                    {
+                        Current_Matchup_Panel.Visibility = Visibility.Collapsed;
+                        Next_Matchup_Panel.Visibility = Visibility.Visible;
+                        Population_Panel.Visibility = Visibility.Collapsed;
+                        NextMatchupButton.Content = "Back";
+                        NextMatchupButton.IsEnabled = true;
+                    }
                     break;
                 case 2:
-                    Current_Matchup_Panel.Visibility = Visibility.Collapsed;
-                    Next_Matchup_Panel.Visibility = Visibility.Collapsed;
-                    Population_Panel.Visibility = Visibility.Visible;                    
-                    matchButton.Visibility = Visibility.Collapsed;
-                    break;
-            }
+                    if (Population_Panel != null)
+                    {
+                        Current_Matchup_Panel.Visibility = Visibility.Collapsed;
+                        Next_Matchup_Panel.Visibility = Visibility.Collapsed;
+                        Population_Panel.Visibility = Visibility.Visible;
+                        NextMatchupButton.Content = "Disabled";
+                        NextMatchupButton.IsEnabled = false;
+                    }
+                    break;             
+            }            
         }
 
-        private void matchButton_Click(object sender, RoutedEventArgs e)
+        private void NextMatchupButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Current_Matchup_Panel.Visibility == Visibility.Visible)
+            if (Current_Matchup_Panel != null && Current_Matchup_Panel.Visibility == Visibility.Visible)
             {
                 PanelVisibilitySwitch(1);
             }
