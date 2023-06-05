@@ -24,9 +24,9 @@
                                 <ColumnDefinition Width="8"/>
                                 <ColumnDefinition Width="200"/>
                             </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Background="#161616" Margin="0,2">
+                            <Border Grid.Column="0" Background="#242424" Margin="0,2">
                                 <Label Content="{Binding TierNumber,Mode=OneWay}"
-                                       Foreground="DarkGray"
+                                       Foreground="LightGray"                                       
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center">
                                 </Label>
