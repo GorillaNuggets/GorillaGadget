@@ -8,7 +8,7 @@
     <StackPanel Orientation="Vertical">
         <Border Background="#161616" Margin="0,0,0,2">
             <StackPanel Orientation="Horizontal">
-                <Label Content="Server" 
+                <Label Content="World" 
                        Foreground="DarkGray" 
                        Width="202" 
                        HorizontalContentAlignment="Center">

@@ -198,15 +198,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Gorilla Gadget"
-        "ProductCode" = "8:{92A34371-E947-49ED-B95A-A058C41B882F}"
-        "PackageCode" = "8:{6668481D-0985-45D9-98F8-5733333D8A5B}"
+        "ProductCode" = "8:{833F1B41-97A0-4679-9D60-9932B405AE5C}"
+        "PackageCode" = "8:{40A19D44-1CB8-4E65-896C-8A85BD9E57C4}"
         "UpgradeCode" = "8:{0CA97711-8ADE-43EE-B034-7E559D7C4024}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.2.2"
+        "ProductVersion" = "8:1.2.3"
         "Manufacturer" = "8:Gorilla"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -748,7 +748,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_073F3EB73F574F1D96767E14B50C0CAC"
             {
-            "SourcePath" = "8:..\\GorillaGadget\\obj\\Release\\net7.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\GorillaGadget\\obj\\Debug\\net7.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9B2B0480A12241CAA9C1A7D8E2F603BC"

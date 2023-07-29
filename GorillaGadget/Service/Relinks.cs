@@ -19,7 +19,7 @@ namespace GorillaGadget.Service
             }
             if ((date - DateTime.Today).TotalDays < 0)
             {
-                date = new DateTime(date.Year, date.AddMonths(2).Month, DateTime.DaysInMonth(date.Year, date.Month));
+                date = new DateTime(date.Year, date.AddMonths(2).Month, DateTime.DaysInMonth(date.Year, date.AddMonths(2).Month));
                 while (date.DayOfWeek != DayOfWeek.Friday)
                 {
                     date = date.AddDays(-1);

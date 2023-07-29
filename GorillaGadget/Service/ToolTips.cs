@@ -17,13 +17,16 @@ namespace GorillaGadget.Service
             var result = string.Empty;
             foreach (var link in links)
             {
-                if (worlds[link].Population == "VeryHigh")
+                if (link < 10000)
                 {
-                    result += string.Format("{0,-22}{1,-8}\r\n", worlds[link].Name, "Very High");
-                }
-                else
-                {
-                    result += string.Format("{0,-22}{1,-8}\r\n", worlds[link].Name, worlds[link].Population);
+                    if (worlds[link].Population == "VeryHigh")
+                    {
+                        result += string.Format("{0,-22}{1,-8}\r\n", worlds[link].Name, "Very High");
+                    }
+                    else
+                    {
+                        result += string.Format("{0,-22}{1,-8}\r\n", worlds[link].Name, worlds[link].Population);
+                    }
                 }
             }
             return result;

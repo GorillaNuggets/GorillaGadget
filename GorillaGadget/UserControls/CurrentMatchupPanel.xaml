@@ -107,7 +107,7 @@
                                         </Label>
                                         <Label Grid.Column="2" 
                                                Content="{Binding VictoryPoints}" 
-                                               Foreground="FloralWhite" 
+                                               Foreground="{Binding VictoryPointsFgColor}" 
                                                Background="black" 
                                                HorizontalContentAlignment="Center" 
                                                Padding="0,3">
