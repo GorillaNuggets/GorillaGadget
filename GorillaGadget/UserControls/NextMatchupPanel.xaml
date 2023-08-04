@@ -8,65 +8,98 @@
     <StackPanel Orientation="Vertical">
         <Border Background="#161616">
             <Label Content="{Binding Matchup.RelinkWeek,Mode=OneWay}" 
-                   Foreground="DarkGray" 
+                   Foreground="DarkGoldenrod" 
                    VerticalContentAlignment="Center" 
                    HorizontalAlignment="Center">
             </Label>
         </Border>
-        <!-- Data Cell -->
-        <StackPanel Orientation="Vertical" Margin="0,2">
-            <ItemsControl ItemsSource="{Binding Matchup.Tiers}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,8">
+        <!-- Data Rows -->
+        <ItemsControl ItemsSource="{Binding Matchup.Tiers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <Grid Margin="0,2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="8"/>
                                 <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="38"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Background="#242424" Margin="0,2">
-                                <Label Content="{Binding TierNumber,Mode=OneWay}"
-                                       Foreground="LightGray"                                       
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center">
-                                </Label>
-                            </Border>
-                            <ItemsControl ItemsSource="{Binding NextMatchup}" Grid.Column="2">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Vertical" Grid.Column="2">
-                                            <Label Grid.Column="0" 
-                                                   Content="{Binding ServerName,Mode=OneWay}" 
-                                                   Foreground="FloralWhite" 
-                                                   Background="{Binding ServerBgColor,Mode=OneWay}" 
-                                                   HorizontalContentAlignment="Center" 
-                                                   Margin="0,2"
-                                                   Padding="0,3">
-                                                <Label.ToolTip>
-                                                    <ToolTip Background="#161616" 
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="22"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" 
+                                   Content="{Binding TierNumber,Mode=OneWay}" 
+                                   Foreground="DimGray" 
+                                   HorizontalContentAlignment="Center" 
+                                   Padding="0,3"/>
+                            <Label Grid.Column="1" 
+                                   Content="Rank" 
+                                   Foreground="DimGray" 
+                                   HorizontalContentAlignment="Center" 
+                                   Padding="0,3"/>
+                            <Label Grid.Column="2" 
+                                   Content="Victory Points" 
+                                   Foreground="DimGray" 
+                                   HorizontalContentAlignment="Center" 
+                                   Padding="0,3"/>
+                        </Grid>
+                        <ItemsControl ItemsSource="{Binding NextMatchup}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="38"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="22"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Column="0" 
+                                               Content="{Binding ServerName}" 
+                                               Foreground="FloralWhite" 
+                                               Background="{Binding ServerBgColor}" 
+                                               HorizontalContentAlignment="Center" 
+                                               Padding="0,3">
+                                            <Label.ToolTip>
+                                                <ToolTip Background="#161616" 
                                                          Height="40" 
                                                          Placement="Top" 
                                                          HorizontalAlignment="Center">
-                                                        <TextBlock Text="{Binding ServerToolTip,Mode=OneWay}" 
+                                                    <TextBlock Text="{Binding ServerToolTip,Mode=OneWay}" 
                                                                FontFamily="Cascadia Mono" 
                                                                FontSize="11" 
                                                                Foreground="Gainsboro">
-                                                        </TextBlock>
-                                                    </ToolTip>
-                                                </Label.ToolTip>
-                                            </Label>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>                        
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-        <Border Background="#161616">
+                                                    </TextBlock>
+                                                </ToolTip>
+                                            </Label.ToolTip>
+                                        </Label>
+                                        <Label Grid.Column="1" 
+                                               Content="" 
+                                               Foreground="DarkGray" 
+                                               Background="#222222" 
+                                               HorizontalContentAlignment="Center" 
+                                               Margin="6,0" Padding="0,3">
+                                        </Label>
+                                        <Label Grid.Column="2" 
+                                               Content="N/A" 
+                                               Foreground="DarkGray" 
+                                               Background="black" 
+                                               HorizontalContentAlignment="Center" 
+                                               Padding="0,3">
+                                        </Label>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!-- End of Match Label -->
+        <Border Background="#161616" Height="26" Margin="0,6,0,0">
             <Label Content="Note: Relink matchups can not be predicted" 
-                   Foreground="DarkGray" 
+                   Foreground="DarkGoldenrod" 
                    HorizontalContentAlignment="Center">
             </Label>
         </Border>
