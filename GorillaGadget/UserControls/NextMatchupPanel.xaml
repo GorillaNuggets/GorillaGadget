@@ -77,7 +77,7 @@
                                         <Label Grid.Column="1" 
                                                Content="" 
                                                Foreground="DarkGray" 
-                                               Background="#222222" 
+                                               Background="#161616" 
                                                HorizontalContentAlignment="Center" 
                                                Margin="6,0" Padding="0,3">
                                         </Label>
@@ -99,7 +99,7 @@
         <!-- End of Match Label -->
         <Border Background="#161616" Height="26" Margin="0,6,0,0">
             <Label Content="Note: Relink matchups can not be predicted" 
-                   Foreground="DarkGoldenrod" 
+                   Foreground="DarkGray" 
                    HorizontalContentAlignment="Center">
             </Label>
         </Border>
