@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GorillaGadget", "GorillaGadget\GorillaGadget.csproj", "{0490581B-4FE6-4309-942B-D3B4FBA4BB2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GorillaGadget", "GorillaGadget\GorillaGadget.csproj", "{0490581B-4FE6-4309-942B-D3B4FBA4BB2C}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{BDE6BA27-1D2B-4B47-A7F9-96A603595543}"
 EndProject
@@ -13,11 +13,11 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0490581B-4FE6-4309-942B-D3B4FBA4BB2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0490581B-4FE6-4309-942B-D3B4FBA4BB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0490581B-4FE6-4309-942B-D3B4FBA4BB2C}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{0490581B-4FE6-4309-942B-D3B4FBA4BB2C}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{0490581B-4FE6-4309-942B-D3B4FBA4BB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0490581B-4FE6-4309-942B-D3B4FBA4BB2C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDE6BA27-1D2B-4B47-A7F9-96A603595543}.Debug|Any CPU.ActiveCfg = Debug
+		{BDE6BA27-1D2B-4B47-A7F9-96A603595543}.Debug|Any CPU.ActiveCfg = Release
 		{BDE6BA27-1D2B-4B47-A7F9-96A603595543}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
