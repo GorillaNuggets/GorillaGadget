@@ -33,7 +33,7 @@ namespace GorillaGadget.Service
                 {
                     case true:
                         list[index].RankFgColor = new SolidColorBrush(Colors.DarkGray);
-                        list[index].RankBgColor = new SolidColorBrush(Color.FromArgb(180, 200, 140, 20));
+                        list[index].RankBgColor = new SolidColorBrush(Color.FromRgb(64, 64, 64));
                         break;
                     case false:
                         list[index].RankFgColor = new SolidColorBrush(Colors.DarkGray);

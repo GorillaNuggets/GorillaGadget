@@ -5,7 +5,7 @@ namespace GorillaGadget.Service
     public class Relinks
     {
         //
-        //  Assemble all the data relating server relinks
+        //  Assemble all the data relating to server relinks
         //
 
         public static DateTime GetRelinkDate()
@@ -29,9 +29,7 @@ namespace GorillaGadget.Service
         }
         public static string GetRelinkWeek(DateTime EoM)
         {
-            var a = EoM.ToShortDateString();
-            var b = EoM.AddDays(7).ToShortDateString();
-            return string.Format("Predicted matchup for {0} thru {1}", a, b);
+            return string.Format("Predicted matchup for {0}", EoM.ToShortDateString());            
         }
         public static string GetRelinkDateString()
         {

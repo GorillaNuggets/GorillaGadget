@@ -2,103 +2,68 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GorillaGadget.UserControls"
-             mc:Ignorable="d">
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             Loaded="UserControl_Loaded">
     <StackPanel Orientation="Vertical">
         <Border Background="#161616">
             <Label Content="{Binding Matchup.RelinkWeek,Mode=OneWay}" 
-                   Foreground="DarkGoldenrod" 
+                   Foreground="DarkGray" 
                    VerticalContentAlignment="Center" 
                    HorizontalAlignment="Center">
             </Label>
         </Border>
         <!-- Data Rows -->
-        <ItemsControl ItemsSource="{Binding Matchup.Tiers}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <Grid Margin="0,2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="38"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="22"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Column="0" 
-                                   Content="{Binding TierNumber,Mode=OneWay}" 
-                                   Foreground="DimGray" 
-                                   HorizontalContentAlignment="Center" 
-                                   Padding="0,3"/>
-                            <Label Grid.Column="1" 
-                                   Content="Rank" 
-                                   Foreground="DimGray" 
-                                   HorizontalContentAlignment="Center" 
-                                   Padding="0,3"/>
-                            <Label Grid.Column="2" 
-                                   Content="Victory Points" 
-                                   Foreground="DimGray" 
-                                   HorizontalContentAlignment="Center" 
-                                   Padding="0,3"/>
-                        </Grid>
-                        <ItemsControl ItemsSource="{Binding NextMatchup}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Margin="0,2">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="200"/>
-                                            <ColumnDefinition Width="38"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="22"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Column="0" 
-                                               Content="{Binding ServerName}" 
-                                               Foreground="FloralWhite" 
-                                               Background="{Binding ServerBgColor}" 
-                                               HorizontalContentAlignment="Center" 
+        <StackPanel Orientation="Vertical" x:Name="MatchUI" Width="216">
+            <ItemsControl ItemsSource="{Binding Matchup.Tiers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="{Binding TierNumber,Mode=OneWay}" 
+                               Foreground="DimGray" 
+                               HorizontalContentAlignment="Center"
+                               Height="22"
+                               Margin="0,2"
+                               Padding="0,3">
+                            </Label>
+                            <ItemsControl ItemsSource="{Binding NextMatchup}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <Label Content="{Binding ServerName}"
+                                               Foreground="FloralWhite"
+                                               Background="{Binding ServerBgColor}"
+                                               HorizontalContentAlignment="Center"
+                                               Width="200"
+                                               Height="22"
+                                               Margin="0,2"
                                                Padding="0,3">
-                                            <Label.ToolTip>
-                                                <ToolTip Background="#161616" 
+                                                <Label.ToolTip>
+                                                    <ToolTip Background="#161616" 
                                                          Height="40" 
                                                          Placement="Top" 
                                                          HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding ServerToolTip,Mode=OneWay}" 
+                                                        <TextBlock Text="{Binding ServerToolTip,Mode=OneWay}" 
                                                                FontFamily="Cascadia Mono" 
                                                                FontSize="11" 
                                                                Foreground="Gainsboro">
-                                                    </TextBlock>
-                                                </ToolTip>
-                                            </Label.ToolTip>
-                                        </Label>
-                                        <Label Grid.Column="1" 
-                                               Content="" 
-                                               Foreground="DarkGray" 
-                                               Background="#161616" 
-                                               HorizontalContentAlignment="Center" 
-                                               Margin="6,0" Padding="0,3">
-                                        </Label>
-                                        <Label Grid.Column="2" 
-                                               Content="N/A" 
-                                               Foreground="DarkGray" 
-                                               Background="black" 
-                                               HorizontalContentAlignment="Center" 
-                                               Padding="0,3">
-                                        </Label>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                                                        </TextBlock>
+                                                    </ToolTip>
+                                                </Label.ToolTip>
+                                            </Label>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Label Height="6"/>
+        </StackPanel>
         <!-- End of Match Label -->
-        <Border Background="#161616" Height="26" Margin="0,6,0,0">
-            <Label Content="Note: Relink matchups can not be predicted" 
+        <Border Background="#161616" Height="26">
+            <Label Content="Press CTRL + C to copy the matchup" 
                    Foreground="DarkGray" 
                    HorizontalContentAlignment="Center">
             </Label>
